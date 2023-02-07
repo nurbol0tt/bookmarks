@@ -6,7 +6,7 @@ app = create_app()
 
 
 def main():
-    app.run(debug=True, port=6004)
+    app.run(debug=True, port=8003)
 
 
 if __name__ == '__main__':

@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e158b035-949f-40d8-bcfc-6acdf0c803ce" name="Changes" comment="" />
+    <list default="true" id="e158b035-949f-40d8-bcfc-6acdf0c803ce" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/like_v1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/account_v1.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/account_v1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/comment_v1.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/comment_v1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/post_v1.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/post_v1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/main_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/main_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extenstions/routes_extension.py" beforeDir="false" afterPath="$PROJECT_DIR$/extenstions/routes_extension.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instance/project.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/user_models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/user_models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,10 +33,16 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2K5pKKAOT52haRIC5rST5cwBkfV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -30,7 +52,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/user/PycharmProjects/store&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/user/PycharmProjects/Flask/bookmarks&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -39,6 +61,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps" />
+      <recent name="$PROJECT_DIR$/apps/api" />
       <recent name="$PROJECT_DIR$/apps/user" />
     </key>
   </component>
@@ -86,10 +110,32 @@
       <workItem from="1673928290997" duration="8913000" />
       <workItem from="1674014659012" duration="1205000" />
       <workItem from="1674105425564" duration="5000" />
+      <workItem from="1674105437948" duration="8394000" />
+      <workItem from="1674393377577" duration="599000" />
+      <workItem from="1674799358903" duration="10813000" />
+      <workItem from="1674884995558" duration="14565000" />
+      <workItem from="1674993573613" duration="10452000" />
+      <workItem from="1675024608925" duration="5734000" />
+      <workItem from="1675178247337" duration="812000" />
+      <workItem from="1675494884391" duration="685000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/bookmarks$main.coverage" NAME="main Coverage Results" MODIFIED="1674928025407" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

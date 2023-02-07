@@ -3,7 +3,7 @@ from flask_restful import Api, Resource
 import validators
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from models.user_models.models import db, Post, User
+from models.user_models.models import db, Post, User, Comment, Like
 
 # from core.domain.account.entity.account import db
 # from core.domain.post.entity.post import Post
@@ -23,16 +23,12 @@ class CreatePost(Resource):
 
         body = request.get_json().get('body', '')
         title = request.get_json().get('title', '')
-        print(body)
-        print(title)
         url = request.get_json().get('url', '')
-        print(url)
 
         if not validators.url(url):
             return jsonify({
                 'error': 'Enter a valid url'
             })
-        print('-------------------------------------------')
         post = Post(url=url, body=body, title=title, user_id=current_user)
         db.session.add(post)
         db.session.commit()
@@ -100,11 +96,18 @@ class PostDetail(Resource):
         current_user = get_jwt_identity()
 
         post = Post.query.filter_by(id=pk).first()
+        comment = Comment.query.filter_by(post_id=pk).all()
+        like = Like.query.filter_by(post_id=pk).all()
+
+        result_comment = []
+        for ct in comment:
+            result_comment.append({'author': ct.author, 'text': ct.text})
 
         if not post:
             return jsonify({
                 "message": "Item not found"
             })
+
         return jsonify({
             'id': post.id,
             'url': post.url,
@@ -114,6 +117,10 @@ class PostDetail(Resource):
             'body': post.body,
             'created_at': post.created_at,
             'updated_at': post.updated_at,
+
+            "comment": result_comment,
+            "like": len(like)
+
         })
 
 

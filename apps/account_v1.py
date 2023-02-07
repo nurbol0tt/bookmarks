@@ -1,18 +1,19 @@
-from flasgger import swag_from
 from flask import Blueprint, request, jsonify
+from flask_bcrypt import Bcrypt
 from flask_restful import Api, Resource
 import validators
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_refresh_token, jwt_required, create_access_token, get_jwt_identity
+
+
+from apps.utils import send_reset_email
 from constants.http_status_codes import HTTP_400_BAD_REQUEST, HTTP_201_CREATED, HTTP_200_OK, HTTP_401_UNAUTHORIZED
-from models.user_models.models import User, db
-
-# from core.domain.account.entity.account import db, User
-
+from models.user_models.models import User, db, Post
 
 app = Blueprint('account_api', __name__)
 
 api = Api(app)
+bcrypt = Bcrypt()
 
 
 @api.resource('/register')
@@ -41,12 +42,10 @@ class Authorize(Resource):
             return jsonify({'error': 'Password is too short'}), HTTP_400_BAD_REQUEST
 
         if User.query.filter_by(email=email).first() is not None:
-            print('___________________________________________')
 
             return jsonify({'error': 'Email is taken'})
 
         if User.query.filter_by(username=username).first() is not None:
-            print('-----------------------------------------------')
 
             return jsonify({'error': 'Name is taken'})
 
@@ -75,19 +74,17 @@ class Login(Resource):
 
         user = User.query.filter_by(email=email).first()
 
-        if user:
-            is_pass_correct = check_password_hash(user.password, password)
+        if user and bcrypt.check_password_hash(user.password, password):
 
-            if is_pass_correct:
-                refresh = create_refresh_token(identity=user.id)
-                access = create_access_token(identity=user.id)
+            refresh = create_refresh_token(identity=user.id)
+            access = create_access_token(identity=user.id)
 
-                return jsonify({
-                    'user': {
-                        'refresh': refresh,
-                        'access': access
-                    }
-                })
+            return jsonify({
+                'user': {
+                    'refresh': refresh,
+                    'access': access
+                }
+            })
 
         return jsonify({'error': 'Wrong credentials'})
 
@@ -100,11 +97,13 @@ class Me(Resource):
         user_id = get_jwt_identity()
 
         user = User.query.filter_by(id=user_id).first()
+        posts = Post.query.filter_by(user_id=user_id).all()
+        result = [{"title": post.title, "text": post.body, "author": post.user_id} for post in posts]
 
         return jsonify({
             "username": user.username,
-            'email': user.email
-
+            'email': user.email,
+            'post': result
         })
 
 
@@ -118,4 +117,43 @@ class Refresh(Resource):
 
         return jsonify({
             "access": access
+        })
+
+
+@api.resource("/reset_password/")
+class ResetResource(Resource):
+
+    @jwt_required()
+    def post(self):
+        user_id = get_jwt_identity()
+
+        user = User.query.filter_by(id=user_id).first()
+        user = User.query.filter_by(email=user.email).first()
+        send_reset_email(user)
+
+        return jsonify({
+            'messages': 'An email has been sent with instructions to reset your password'
+        })
+
+
+@api.resource("/reset_password/<token>/")
+class ResetTokenResource(Resource):
+
+    def post(self, token):
+        user = User.verify_reset_token(token)
+        data = request.get_json()
+        password = data['password']
+        if user is None:
+            return jsonify({
+                "messages": "That is an invalid or expired token"
+            })
+        print(password)
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        print(hashed_password)
+        user.password = hashed_password
+
+        db.session.commit()
+        print(user.password)
+        return jsonify({
+            "messages": "Your password has been updated! You are now able to log in"
         })

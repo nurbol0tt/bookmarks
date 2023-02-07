@@ -1,5 +1,7 @@
 from flask import Flask
+from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
+from flask_mail import Mail
 from flask_migrate import Migrate
 
 from config.prod_config import ProductConfig
@@ -18,6 +20,8 @@ def create_app():
     JWTManager(app)
     db.init_app(app)
     Migrate(app, db)
+    Mail(app)
+    Bcrypt(app)
 
     register_routes(app)
     register_exception_handler(app)
